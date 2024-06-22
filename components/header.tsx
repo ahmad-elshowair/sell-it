@@ -6,7 +6,7 @@ const Header = ({ font }: { font: string }) => {
 			<nav className="flex justify-between px-12 mx-auto">
 				<Link className="" href="/">
 					<span className={`lowercase  text-orange-50 font-bold text-2xl`}>
-						Sell it
+						<span className="text-4xl">🏪</span> Sell it
 					</span>
 				</Link>
 				<Link className="" href="/">
