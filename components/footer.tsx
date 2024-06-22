@@ -1,8 +1,12 @@
-export const Footer = () => {
+const Footer = () => {
 	const date = new Date();
 	return (
-		<footer>
-			<h3>© A.E {date.getFullYear()}</h3>
+		<footer className="py-4 px-12 bg-gradient-to-tr from-green-600 via-orange-200 to-green-400">
+			<h3 className="font-bold text-xl text-orange-50  lowercase">
+				© A.E.DEV {date.getFullYear()}
+			</h3>
 		</footer>
 	);
 };
+
+export default Footer;
