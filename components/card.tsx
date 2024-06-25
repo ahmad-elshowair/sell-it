@@ -8,9 +8,9 @@ type CardProps = {
 	imageUrl: string;
 	price: number;
 };
-const Card: React.FC<CardProps> = ({ name, imageUrl, price }) => {
+const Card: React.FC<CardProps> = ({ id, name, imageUrl, price }) => {
 	return (
-		<Link href="/">
+		<Link href={`/products/${id}`}>
 			<article className="max-w-lg rounded h-full flex flex-col justify-between bg-orange-400 mb-3 overflow-hidden">
 				<picture className="relative h-96 bg-center">
 					<Image

@@ -24,7 +24,7 @@ export default async function Home() {
 	}
 
 	const { data: boostedProducts, error: boostedProductsError } = await supabase
-		.from("product")
+		.from("products")
 		.select()
 		.eq("isBoosted", true);
 
@@ -35,7 +35,7 @@ export default async function Home() {
 					<article className="flex flex-col sm:mb-12 xl:pt-20">
 						<h2 className="text-5xl font-bold mb-16">Top Products</h2>
 						<p className="text-2xl text-gray-400">
-							You may pay to boost your products here!
+							You may pay to boost your products here 👉
 						</p>
 					</article>
 					<article className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 xl:gap-12">
