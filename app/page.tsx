@@ -1,6 +1,8 @@
 import Card from "@/components/card";
 import { createClient } from "@/supabase/client";
+import { notFound } from "next/navigation";
 
+export const revalidate = 3600;
 export default async function Home() {
 	// const products = [
 	// 	{
@@ -12,11 +14,19 @@ export default async function Home() {
 	// 			"https://cdn.pixabay.com/photo/2023/05/03/13/25/paste-7967719_640.jpg",
 	// 	},
 	// ];
+
 	const supabase = createClient();
-	const { data: products, error } = await supabase.from("products").select();
+	const { data: products, error: productsError } = await supabase
+		.from("products")
+		.select();
 	if (!products) {
-		return <h1 className="text-8xl">Not Products Found!</h1>;
+		return notFound();
 	}
+
+	const { data: boostedProducts, error: boostedProductsError } = await supabase
+		.from("product")
+		.select()
+		.eq("isBoosted", true);
 
 	return (
 		<main className="min-h-screen m-auto">
@@ -29,14 +39,22 @@ export default async function Home() {
 						</p>
 					</article>
 					<article className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 xl:gap-12">
-						{products.map((product) => (
-							<Card key={`${product.name}-${product.id}`} {...product} />
-						))}
+						{boostedProducts ? (
+							boostedProducts.map((product) => (
+								<Card key={`${product.name}-${product.id}`} {...product} />
+							))
+						) : (
+							<h1 className="pt-20 text-xl font-extrabold">
+								No Boosted Products yet!
+							</h1>
+						)}
 					</article>
 				</section>
 
-				<h1 className="pl-6 py-2 relative inline-block text-4xl mt-20 mb-16 capitalize after:block after:absolute after:content-['---'] after:text-8xl after:-right-32 after:-top-6 after:text-orange-500">
+				<h1 className="pl-6 py-2 relative inline-block text-4xl mt-20 mb-16 capitalize">
+					<span className="text-orange-400 text-8xl">-</span>
 					<span className="relative font-extrabold">All products</span>
+					<span className="text-orange-400 text-8xl">-</span>
 				</h1>
 				<section className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6">
 					{products.map((product) => (
