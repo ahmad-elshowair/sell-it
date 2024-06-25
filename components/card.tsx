@@ -5,28 +5,28 @@ type CardProps = {
 	id?: number;
 	name: string;
 	description?: string;
-	image: string;
+	imageUrl: string;
 	price: number;
 };
-const Card: React.FC<CardProps> = ({ name, image, price }) => {
+const Card: React.FC<CardProps> = ({ name, imageUrl, price }) => {
 	return (
 		<Link href="/">
 			<article className="max-w-lg rounded h-full flex flex-col justify-between bg-orange-400 mb-3 overflow-hidden">
 				<picture className="relative h-96 bg-center">
 					<Image
 						className="rounded-t"
-						src={image}
+						src={`${process.env.SUPABASE_URL}/storage/v1/object/public/sellit-storage/${imageUrl}`}
 						alt={name}
 						layout="fill"
 						style={{ objectFit: "cover" }}
 					/>
 				</picture>
-				<div className="p-4 flex justify-between">
-					<h2 className="text-2xl lg:text-4xl font-bold text-red-200 uppercase line-clamp-1">
+				<div className="p-4 flex  flex-col justify-between gap-3">
+					<h2 className="text-2xl font-bold text-red-200 uppercase line-clamp-1">
 						{name}
 					</h2>
-					<span className="text-white font-semibold border-2 px-5 py-1 rounded-xl hover:bg-white hover:text-orange-400 transition-all ease-in-out duration-200">
-						{price}
+					<span className="text-white font-semibold border-2 px-5 py-1 rounded-xl hover:bg-white hover:text-orange-400 transition-all ease-in-out duration-200 max-w-[200px] self-end">
+						{price} $
 					</span>
 				</div>
 			</article>

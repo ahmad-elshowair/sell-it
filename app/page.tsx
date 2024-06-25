@@ -1,16 +1,23 @@
 import Card from "@/components/card";
+import { createClient } from "@/supabase/client";
 
-export default function Home() {
-	const products = [
-		{
-			id: 1,
-			name: "Product 1",
-			price: 10.99,
-			description: "This is product 1",
-			image:
-				"https://cdn.pixabay.com/photo/2023/05/03/13/25/paste-7967719_640.jpg",
-		},
-	];
+export default async function Home() {
+	// const products = [
+	// 	{
+	// 		id: 1,
+	// 		name: "Product 1",
+	// 		price: 10.99,
+	// 		description: "This is product 1",
+	// 		image:
+	// 			"https://cdn.pixabay.com/photo/2023/05/03/13/25/paste-7967719_640.jpg",
+	// 	},
+	// ];
+	const supabase = createClient();
+	const { data: products, error } = await supabase.from("products").select();
+	if (!products) {
+		return <h1 className="text-8xl">Not Products Found!</h1>;
+	}
+
 	return (
 		<main className="min-h-screen m-auto">
 			<div className="px-12 py-8">
