@@ -1,8 +1,19 @@
+"use client";
+import { sellItemAction } from "@/actions";
+import { useFormState } from "react-dom";
+
+const initialState = {
+	message: "",
+	error: null,
+};
 const SellProduct = () => {
+	const [state, formAction] = useFormState<any>(sellItemAction, initialState);
 	return (
 		<section className="px-12 py-8 h-[86.2vh]">
 			<h1 className="text-3xl font-bold mb-4 text-center">Sell a Product</h1>
-			<form className="flex flex-col gap-4 max-w-lg m-auto p-4 border-2 border-gray-400 rounded-md border-opacity-10">
+			<form
+				className="flex flex-col gap-4 max-w-lg m-auto p-4 border-2 border-gray-400 rounded-md border-opacity-10"
+				action={formAction}>
 				<div className="mb-2">
 					<label className="font-semibold" htmlFor="product-name">
 						<span className="text-gray-700">Product Name</span>
