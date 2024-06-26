@@ -57,7 +57,7 @@ const Product = async ({ params }: productProps) => {
 						width={600}
 						height={600}
 						alt={product.name}
-						src={`${process.env.SUPABASE_URL}/storage/v1/object/public/sellit-storage/${product.imageUrl}`}
+						src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/sellit-storage/${product.imageUrl}`}
 					/>
 				</figure>
 				<article className="bg-slate-200 py-4 px-8 rounded-xl w-1/2">

@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({ id, name, imageUrl, price }) => {
 				<picture className="relative h-96 bg-center">
 					<Image
 						className="rounded-t"
-						src={`${process.env.SUPABASE_URL}/storage/v1/object/public/sellit-storage/${imageUrl}`}
+						src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/sellit-storage/${imageUrl}`}
 						alt={name}
 						layout="fill"
 						style={{ objectFit: "cover" }}

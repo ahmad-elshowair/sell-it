@@ -41,7 +41,13 @@ export default async function Home() {
 					<article className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 xl:gap-12">
 						{boostedProducts ? (
 							boostedProducts.map((product) => (
-								<Card key={`${product.name}-${product.id}`} {...product} />
+								<Card
+									key={`${product.name}-${product.id}`}
+									description={product.description}
+									imageUrl={product.imageUrl}
+									price={product.price}
+									name={product.name}
+								/>
 							))
 						) : (
 							<h1 className="pt-20 text-xl font-extrabold">
@@ -58,7 +64,13 @@ export default async function Home() {
 				</h1>
 				<section className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 xl:gap-16">
 					{products.map((product) => (
-						<Card key={`${product.name}-${product.id}`} {...product} />
+						<Card
+							key={`${product.name}-${product.id}`}
+							description={product.description}
+							imageUrl={product.imageUrl}
+							price={product.price}
+							name={product.name}
+						/>
 					))}
 				</section>
 			</div>
