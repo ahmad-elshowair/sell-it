@@ -56,7 +56,7 @@ export default async function Home() {
 					<span className="relative font-extrabold">All products</span>
 					<span className="text-orange-400 text-8xl">-</span>
 				</h1>
-				<section className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6">
+				<section className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 xl:gap-16">
 					{products.map((product) => (
 						<Card key={`${product.name}-${product.id}`} {...product} />
 					))}

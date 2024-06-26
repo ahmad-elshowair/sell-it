@@ -11,7 +11,7 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({ id, name, imageUrl, price }) => {
 	return (
 		<Link href={`/products/${id}`}>
-			<article className="max-w-lg rounded h-full flex flex-col justify-between bg-orange-400 mb-3 overflow-hidden">
+			<article className="max-w-lg rounded h-full flex flex-col justify-between bg-orange-400 mb-3 shadow shadow-gray-600 hover:scale-95 hover:shadow-xl hover:shadow-green-600 duration-700 transition-all ease-out ">
 				<picture className="relative h-96 bg-center">
 					<Image
 						className="rounded-t"
