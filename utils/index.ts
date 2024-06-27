@@ -1,5 +1,6 @@
 export const getCanonicalUrl = () => {
-	let deployUrl = "";
+	let deployUrl =
+		"https://sell-iagwj1xdn-ahmad-elshowairs-projects.vercel.app/";
 	return process.env.NODE_ENV !== "production"
 		? "http://localhost:3000"
 		: deployUrl;
