@@ -1,5 +1,5 @@
 import { createClient } from "@/supabase/client";
-import { getCanonicalUrl, getIMageUrl } from "@/utils";
+import { getIMageUrl } from "@/utils";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +41,7 @@ export async function generateMetadata(
 			images: [getIMageUrl(product.imageUrl)],
 		},
 		alternates: {
-			canonical: `${getCanonicalUrl()}/products/${id}`,
+			canonical: `/products/${id}`,
 		},
 	};
 }

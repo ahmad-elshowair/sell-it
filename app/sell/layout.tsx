@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 		images: [`${getCanonicalUrl()}/assets/logo-color.png`],
 	},
 	alternates: {
-		canonical: `${getCanonicalUrl()}/products/add-product`,
+		canonical: `/products/add-product`,
 	},
 };
 function Layout({

@@ -12,7 +12,7 @@ const Card: React.FC<Product> = ({ id, name, imageUrl, price }) => {
 						className="rounded-t"
 						src={`${getIMageUrl(imageUrl)}`}
 						alt={name}
-						layout="fill"
+						fill={true}
 						style={{ objectFit: "cover" }}
 					/>
 				</picture>

@@ -15,14 +15,15 @@ const oswaldHeader = Oswald({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(getCanonicalUrl()),
 	title: "sell it",
 	description:
 		"sell it is a website for easy selling different products with feature of boosting a products.",
 	openGraph: {
-		images: [`${getCanonicalUrl()}/assets/logo-color.png`],
+		images: [`/assets/logo-color.png`],
 	},
 	alternates: {
-		canonical: getCanonicalUrl(),
+		canonical: "/",
 	},
 };
 
