@@ -1,4 +1,6 @@
 import { createClient } from "@/supabase/client";
+import { getCanonicalUrl, getIMageUrl } from "@/utils";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,7 +12,42 @@ type productProps = {
 };
 const supabase = createClient();
 
+export async function generateMetadata(
+	{ params }: productProps,
+	parent: ResolvingMetadata,
+): Promise<Metadata> {
+	// read route params
+	const id = params.slug;
+
+	// fetch data
+	const { data: product, error: errorProduct } = await supabase
+		.from("products")
+		.select()
+		.match({ id })
+		.single();
+
+	if (errorProduct || !product) {
+		console.error("Error fetching product:", errorProduct);
+		return { title: "", description: "" };
+	}
+
+	// optionally access and extend (rather than replace) parent metadata
+	// const previousImages = (await parent).openGraph?.images || [];
+
+	return {
+		title: product.name,
+		description: product.description,
+		openGraph: {
+			images: [getIMageUrl(product.imageUrl)],
+		},
+		alternates: {
+			canonical: `${getCanonicalUrl()}/products/${id}`,
+		},
+	};
+}
+
 export async function generateStaticParams() {
+	// fetching data
 	const { data: products, error: productsError } = await supabase
 		.from("products")
 		.select("id");
@@ -57,7 +94,7 @@ async function Product({ params }: productProps) {
 						width={600}
 						height={600}
 						alt={product.name}
-						src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/sellit-storage/${product.imageUrl}`}
+						src={getIMageUrl(product.imageUrl)}
 					/>
 				</figure>
 				<article className="bg-slate-200 py-4 px-8 rounded-xl w-1/2">
