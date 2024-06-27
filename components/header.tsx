@@ -1,9 +1,10 @@
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({ font }: { font?: string }) => {
 	return (
-		<header className="py-3 bg-gradient-to-tr from-green-600 via-orange-200 to-green-400">
-			<nav className="flex justify-between px-12 mx-auto">
+		<header
+			className={`py-3 bg-gradient-to-tr from-green-600 via-orange-200 to-green-400 ${font}`}>
+			<nav className="flex justify-between items-center px-12 mx-auto">
 				<Link
 					className=" hover:scale-105 hover:drop-shadow-xl duration-700 ease-out"
 					href="/">

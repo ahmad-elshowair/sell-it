@@ -2,10 +2,17 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { getCanonicalUrl } from "@/utils";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Oswald, Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const PoppinsDefault = Poppins({
+	subsets: ["latin"],
+	weight: ["100", "200", "400", "300", "500", "600", "700", "800", "900"],
+});
+const oswaldHeader = Oswald({
+	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
 	title: "sell it",
@@ -26,10 +33,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
-				<Header />
+			<body className={PoppinsDefault.className}>
+				<Header font={oswaldHeader.className} />
 				{children}
-				<Footer />
+				<Footer font={oswaldHeader.className} />
 			</body>
 		</html>
 	);
