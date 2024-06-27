@@ -3,25 +3,42 @@ import { createClient } from "@/supabase/client";
 import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
-export default async function Home() {
-	// const products = [
-	// 	{
-	// 		id: 1,
-	// 		name: "Product 1",
-	// 		price: 10.99,
-	// 		description: "This is product 1",
-	// 		image:
-	// 			"https://cdn.pixabay.com/photo/2023/05/03/13/25/paste-7967719_640.jpg",
-	// 	},
-	// ];
 
+/**
+ * The Home page component.
+ *
+ * This component fetches products from Supabase and displays them in two sections:
+ * 1. Top Products: Displays boosted products.
+ * 2. All Products: Displays all products.
+ *
+ * @returns Promise{JSX.Element} The Home page component.
+ */
+
+export default async function Home() {
+	/**
+	 * Create a Supabase client instance.
+	 *
+	 * @returns {SupabaseClient} The Supabase client instance.
+	 */
 	const supabase = createClient();
+
+	/**
+	 * Fetch all products from Supabase.
+	 *
+	 * @returns {Promise<{ data: Product[], error: Error | null }>} The promise resolving to an object with data and error properties.
+	 */
 	const { data: products, error: productsError } = await supabase
 		.from("products")
 		.select();
-	if (!products) {
+	if (!products || productsError) {
 		return notFound();
 	}
+
+	/**
+	 * Fetch boosted products from Supabase.
+	 *
+	 * @returns {Promise<{ data: Product[], error: Error | null }>} The promise resolving to an object with data and error properties.
+	 */
 
 	const { data: boostedProducts, error: boostedProductsError } = await supabase
 		.from("products")
