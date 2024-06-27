@@ -40,22 +40,35 @@ export default async function Home() {
 	 * @returns {Promise<{ data: Product[], error: Error | null }>} The promise resolving to an object with data and error properties.
 	 */
 
-	const { data: boostedProducts, error: boostedProductsError } = await supabase
+	const { data: boostedProducts } = await supabase
 		.from("products")
 		.select()
-		.eq("isBoosted", true);
+		.eq("isBoosted", true)
+		.limit(3);
 
 	return (
 		<main className="min-h-screen m-auto">
 			<div className="px-12 py-8">
-				<section className="flex flex-col xl:flex-row gap-2 xl:gap-40">
-					<article className="flex flex-col sm:mb-12 xl:pt-20">
-						<h2 className="text-5xl font-bold mb-16">Top Products</h2>
-						<p className="text-2xl text-gray-400">
-							You may pay to boost your products here 👉
+				<section className="grid grid-cols-1 gap-10 xl:grid-cols-2">
+					<article className="flex flex-col sm:mb-12 items-center xl:items-start xl:justify-start">
+						<h2 className="md:text-5xl font-bold mb-16 text-3xl">
+							<span className="relative md:top-5 text-orange-400 text-4xl">
+								-
+							</span>
+							Top Products
+							<span className="relative md:top-5 text-orange-400 text-4xl xl:hidden">
+								-
+							</span>
+						</h2>
+						<p className="text-lg md:text-3xl text-gray-400">
+							You may pay to boost your products here
+							<span className="hidden xl:inline text-4xl">👉</span>
+							<span className="xl:hidden block text-4xl text-center mt-10">
+								👇
+							</span>
 						</p>
 					</article>
-					<article className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 xl:gap-12">
+					<article className="w-full grid md:grid-cols-2 md:gap-8 xs:gap-4 xl:grid-cols-3">
 						{boostedProducts ? (
 							boostedProducts.map((product) => (
 								<Card key={`${product.name}-${product.id}`} {...product} />
@@ -68,12 +81,12 @@ export default async function Home() {
 					</article>
 				</section>
 
-				<h1 className="pl-6 py-2 relative inline-block text-4xl mt-20 mb-16 capitalize">
-					<span className="text-orange-400 text-8xl">-</span>
-					<span className="relative font-extrabold">All products</span>
-					<span className="text-orange-400 text-8xl">-</span>
+				<h1 className="pl-6 py-2 text-4xl mt-20 mb-16 capitalize  xs:text-3xl text-center xl:text-start">
+					<span className="text-orange-400 text-8xl xs:text-6xl">-</span>
+					<span className="font-extrabold">All products</span>
+					<span className="text-orange-400 text-8xl xs:text-6xl">-</span>
 				</h1>
-				<section className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 xl:gap-16">
+				<section className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 xl:gap-16">
 					{products.map((product) => (
 						<Card key={`${product.name}-${product.id}`} {...product} />
 					))}

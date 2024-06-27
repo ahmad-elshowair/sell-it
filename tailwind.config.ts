@@ -18,6 +18,10 @@ const config: Config = {
 					951: "#9CAE96",
 				},
 			},
+
+			screens: {
+				xs: "425px",
+			},
 		},
 	},
 	plugins: [],
