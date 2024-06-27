@@ -1,21 +1,16 @@
+import { Product } from "@/types";
+import { getIMageUrl } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-type CardProps = {
-	id: number;
-	name: string;
-	description?: string;
-	imageUrl: string;
-	price: number;
-};
-const Card: React.FC<CardProps> = ({ id, name, imageUrl, price }) => {
+const Card: React.FC<Product> = ({ id, name, imageUrl, price }) => {
 	return (
 		<Link href={`/products/${id}`}>
 			<article className="max-w-lg rounded h-full flex flex-col justify-between bg-orange-400 mb-3 shadow shadow-gray-600 hover:scale-95 hover:shadow-xl hover:shadow-green-600 duration-700 transition-all ease-out ">
 				<picture className="relative h-96 bg-center">
 					<Image
 						className="rounded-t"
-						src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/sellit-storage/${imageUrl}`}
+						src={`${getIMageUrl(imageUrl)}`}
 						alt={name}
 						layout="fill"
 						style={{ objectFit: "cover" }}
