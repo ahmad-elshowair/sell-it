@@ -1,5 +1,6 @@
 "use client";
 import { sellItemAction } from "@/actions";
+import { SubmitButton } from "@/components/submit-button";
 import { useFormState } from "react-dom";
 
 const initialState = {
@@ -15,7 +16,7 @@ const SellProduct: React.FC = () => {
 		<section className="px-12 py-8 mb-[3.9rem]">
 			<h1 className="text-3xl font-bold mb-4 text-center">Sell a Product</h1>
 			<form
-				className="flex flex-col gap-4 max-w-lg m-auto p-4 border-2 border-gray-400 rounded-md border-opacity-10"
+				className="flex flex-col gap-4 max-w-lg m-auto px-6 py-8 border-2 border-gray-400 rounded-md border-opacity-10"
 				action={formAction}>
 				{state?.type === "error" && (
 					<p className="text-lg mb-2 bg-red-500 border-spacing-2 border-gray-300 rounded-md p-2 my-4 text-yellow-200 font-bold">
@@ -105,13 +106,7 @@ const SellProduct: React.FC = () => {
 						</span>
 					)}
 				</div>
-				<div className="text-center">
-					<button
-						type="submit"
-						className=" w-full border-2 border-green-700 bg-transparent text-green-700  font-sans font-semibold text-lg rounded-md p-2 hover:bg-green-700 hover:text-white transition-all duration-1000 ease-in-out">
-						Add
-					</button>
-				</div>
+				<SubmitButton />
 			</form>
 		</section>
 	);

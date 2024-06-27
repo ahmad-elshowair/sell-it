@@ -1,6 +1,8 @@
 "use server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const MAX_FILE_SIZE = 5000000;
@@ -11,14 +13,6 @@ const ACCEPTED_IMAGE_TYPE = [
 	"image/jpg",
 ];
 export async function sellItemAction(pervState: any, formData: FormData) {
-	console.log(pervState);
-
-	console.log(formData.get("product-name"));
-	console.log(formData.get("description"));
-	console.log(formData.get("contact-email"));
-	console.log(formData.get("price"));
-	console.log(formData.get("image-url"));
-
 	const schema = z.object({
 		productName: z
 			.string()
@@ -58,7 +52,7 @@ export async function sellItemAction(pervState: any, formData: FormData) {
 		validatedFields.data;
 
 	try {
-		const fileName = `${Math.random()}-${imageUrl}`;
+		const fileName = `${Math.random()}-${imageUrl.name}`;
 		const supabase = createServerActionClient({ cookies });
 		const { data, error } = await supabase.storage
 			.from("sellit-storage")
@@ -75,18 +69,21 @@ export async function sellItemAction(pervState: any, formData: FormData) {
 		if (data) {
 			const path = data.path;
 			const { error: productError } = await supabase.from("products").insert({
-				productName,
-				description,
+				name: productName,
+				description: description,
 				imageUrl: path,
-				price,
-				contactEmail,
+				price: price,
+				contactEmail: contactEmail,
 			});
 		}
 	} catch (error) {
 		console.error(`Error: ${(error as Error).message}`);
 		return {
 			type: "error",
-			message: `Database Error: ${(error as Error).message}`,
+			message: `Database Error catch: ${(error as Error).message}`,
 		};
 	}
+
+	revalidatePath("/");
+	redirect("/");
 }

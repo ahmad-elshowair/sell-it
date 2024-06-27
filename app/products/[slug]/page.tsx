@@ -1,41 +1,41 @@
 import { createClient } from "@/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+
+export const revalidate = 0;
 
 type productProps = {
 	params: { slug: string };
 };
+const supabase = createClient();
+
 export async function generateStaticParams() {
-	const supabase = createClient();
+	const { data: products, error: productsError } = await supabase
+		.from("products")
+		.select("id");
 
-	const { data: products } = await supabase.from("products").select();
-
-	if (!products) {
+	if (productsError || !products) {
+		console.error("Error fetching products:", productsError);
 		return [];
 	}
 
-	return products.map((product) => ({
-		slug: product.id,
+	return products?.map(({ id }) => ({
+		slug: id,
 	}));
 }
-const Product = async ({ params }: productProps) => {
-	const supabase = createClient();
 
+async function Product({ params }: productProps) {
 	const { data: product, error: errorProduct } = await supabase
 		.from("products")
 		.select()
 		.match({ id: params.slug })
 		.single();
 
-	// const data = {
-	// 	id: 1,
-	// 	name: "Product 1",
-	// 	price: 10.99,
-	// 	description: "This is product 1",
-	// 	image:
-	// 		"https://cdn.pixabay.com/photo/2023/05/03/13/25/paste-7967719_640.jpg",
-	// 	email: "ahmad@email.com",
-	// };
+	if (errorProduct || !product) {
+		console.error("Error fetching product:", errorProduct);
+		return notFound();
+	}
 
 	return (
 		<section className="px-36 my-8">
@@ -86,5 +86,5 @@ const Product = async ({ params }: productProps) => {
 			</Link>
 		</section>
 	);
-};
+}
 export default Product;
