@@ -13,7 +13,7 @@ const SellProduct: React.FC = () => {
 		initialState,
 	);
 	return (
-		<section className="px-12 py-8 mb-[3.9rem]">
+		<section className="px-12 py-8 mb-[1.8rem]">
 			<h1 className="text-3xl font-bold mb-4 text-center">Sell a Product</h1>
 			<form
 				className="flex flex-col gap-4 max-w-lg m-auto px-6 py-8 border-2 border-gray-400 rounded-md border-opacity-10"
