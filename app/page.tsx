@@ -50,7 +50,7 @@ export default async function Home() {
 		<main className="min-h-screen m-auto">
 			<div className="px-12 py-8">
 				<section className="grid grid-cols-1 gap-10 xl:grid-cols-2">
-					<article className="flex flex-col sm:mb-12 items-center xl:items-start xl:justify-start">
+					<article className="flex flex-col sm:mb-12 justify-center">
 						<h2 className="md:text-5xl font-bold mb-16 text-3xl">
 							<span className="relative md:top-5 text-orange-400 text-4xl">
 								-
