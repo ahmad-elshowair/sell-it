@@ -9,6 +9,7 @@ const Footer = ({ font }: { font: string }) => {
 				©{" "}
 				<Link
 					href={"https://www.linkedin.com/in/ahmad-elshowair/"}
+					target="_blank"
 					className="hover:underline duration-500 transition-all ease-in-out">
 					A.E.DEV
 				</Link>{" "}
